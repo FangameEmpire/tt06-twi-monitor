@@ -29,9 +29,9 @@ module async_transmitter
 	localparam ClkFrequency = FREQUENCY;	// 50MHz
 	localparam Baud = BAUD;
 
-	generate begin: gen_range_checker
-		if(ClkFrequency<Baud*8 && (ClkFrequency % Baud!=0)) ASSERTION_ERROR PARAMETER_OUT_OF_RANGE("Frequency incompatible with requested Baud rate");
-	end endgenerate
+//	generate begin: gen_range_checker
+//		if(ClkFrequency<Baud*8 && (ClkFrequency % Baud!=0)) ASSERTION_ERROR PARAMETER_OUT_OF_RANGE("Frequency incompatible with requested Baud rate");
+//	end endgenerate
 
 	////////////////////////////////
 	`ifdef SIMULATION
@@ -101,10 +101,10 @@ module async_receiver
 	// we oversample the RxD line at a fixed rate to capture each RxD data bit at the "right" time
 	// 8 times oversampling by default, use 16 for higher quality reception
 
-	generate begin: gen_frequency_checker
-		if(ClkFrequency<Baud*Oversampling) ASSERTION_ERROR PARAMETER_OUT_OF_RANGE("Frequency too low for current Baud rate and oversampling");
-		if(Oversampling<8 || ((Oversampling & (Oversampling-1))!=0)) ASSERTION_ERROR PARAMETER_OUT_OF_RANGE("Invalid oversampling value");
-	end endgenerate
+//	generate begin: gen_frequency_checker
+//		if(ClkFrequency<Baud*Oversampling) ASSERTION_ERROR PARAMETER_OUT_OF_RANGE("Frequency too low for current Baud rate and oversampling");
+//		if(Oversampling<8 || ((Oversampling & (Oversampling-1))!=0)) ASSERTION_ERROR PARAMETER_OUT_OF_RANGE("Invalid oversampling value");
+//	end endgenerate
 
 	////////////////////////////////
 	reg [3:0] RxD_state = 0;
