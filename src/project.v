@@ -17,7 +17,7 @@ module tt_um_nicklausthompson_twi_monitor (
 );
 
     // Active inputs
-    wire SDA_in, SCL_in;
+    wire SDA_in, SCL_in, SDA, SCL;
     assign SDA_in = ui_in[0];
     assign SCL_in = ui_in[1];
 
