@@ -55,6 +55,7 @@ module TWI_Frame_Presenter (
 				if (~TX_busy)		ns = idle;
 				else				ns = send_acks;
 			end
+			default: 				ns = idle;
 		endcase // ps
 	end // always_comb
 	
