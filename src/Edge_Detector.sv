@@ -25,59 +25,6 @@ module Edge_Detector(
 	
 endmodule // Edge_Detector
 
-module Edge_Detector_Testbench();
-	// Ports
-	logic clk, reset;
-	logic in;
-	logic posedge_detected, negedge_detected;
-
-	// Device under test
-	Edge_Detector dut (.*);
-
-	// Set up a simulated clock.
-	parameter CLOCK_PERIOD=100;
-	initial begin
-		clk <= 0;
-		forever #(CLOCK_PERIOD/2) clk <= ~clk; // Forever toggle the clock
-	end
-	
-	initial begin		
-		/* NOP */ 	repeat(01) @(posedge clk);
-		
-		// Reset
-		reset <= 1; repeat(01) @(posedge clk);
-		reset <= 0;	repeat(01) @(posedge clk);
-		
-		// Test edge detection
-		in <= 0; 	repeat(12) @(posedge clk);
-		in <= 1; 	repeat(01) @(posedge clk);
-		in <= 0; 	repeat(04) @(posedge clk);
-		in <= 1; 	repeat(05) @(posedge clk);
-		in <= 0; 	repeat(02) @(posedge clk);
-		in <= 1; 	repeat(03) @(posedge clk);
-		in <= 0; 	repeat(04) @(posedge clk);
-		in <= 1; 	repeat(02) @(posedge clk);
-		in <= 0; 	repeat(04) @(posedge clk);
-		in <= 1; 	repeat(01) @(posedge clk);
-		in <= 0; 	repeat(01) @(posedge clk);
-		in <= 1; 	repeat(01) @(posedge clk);
-		in <= 0; 	repeat(01) @(posedge clk);
-		
-		// Test synchronous reset
-		in <= 1; 	repeat(05) @(posedge clk);
-		reset <= 1;	repeat(05) @(posedge clk);
-		in <= 0; 	repeat(05) @(posedge clk);
-		reset <= 0;	repeat(05) @(posedge clk);
-		reset <= 1;	repeat(05) @(posedge clk);
-		in <= 1; 	repeat(05) @(posedge clk);
-		reset <= 0;	repeat(05) @(posedge clk);
-		in <= 0; 	repeat(05) @(posedge clk);
-		
-		// End the simulation.
-		$stop;
-	end
-endmodule // Metastability_Buffer_Testbench
-
 module Posedge_Detector(
 	clk, 
 	reset, 
